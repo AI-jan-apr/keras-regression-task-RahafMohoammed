@@ -1,23 +1,85 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/V4SBfq0-)
-# Regression Task
+# House Price Prediction API
 
-## Task
+A deep learning model built with Keras to predict house prices, deployed using FastAPI.
 
-Solve the regression task using the provided notebook:
-
-```
-keras-regression-task.ipynb
-```
-
-After completing the task, deploy your trained model using FastAPI.
+---
 
 ## Project Structure
 
-Your project should follow this structure:
+```
+├── main.py
+├── my_house_model.keras
+├── scaler_weights.pkl
+├── kc_house_data.csv
+└── 01_Keras_Regression_task.ipynb
+```
 
+---
+
+## How to Run
+
+```bash
+uvicorn main:app --reload
 ```
-keras-regression-task.ipynb
-deploy.py
-model_weights.pkl
-scaler_weights.pkl
+
+Then open: http://127.0.0.1:8000/docs
+
+---
+
+## Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Welcome message |
+| POST | `/predict` | Predict house price |
+
+---
+
+## Example Request
+
+```json
+{
+  "bedrooms": 3,
+  "bathrooms": 2.25,
+  "sqft_living": 1800,
+  "sqft_lot": 7200,
+  "floors": 2,
+  "waterfront": 0,
+  "view": 0,
+  "condition": 3,
+  "grade": 7,
+  "sqft_above": 1800,
+  "sqft_basement": 0,
+  "yr_built": 1990,
+  "yr_renovated": 0,
+  "zipcode": 98178,
+  "lat": 47.5112,
+  "long": -122.257,
+  "sqft_living15": 1340,
+  "sqft_lot15": 5650,
+  "month": 5,
+  "year": 2015
+}
 ```
+
+## Example Response
+
+```json
+{
+  "status": "success",
+  "predicted_price": "$351,621.62"
+}
+```
+
+---
+
+## Dataset
+
+King County House Sales dataset (kc_house_data.csv) — 21,613 records with 20 features.
+
+## Model
+
+- Framework: TensorFlow / Keras
+- Type: Sequential Neural Network
+- Loss: Mean Squared Error
+- Scaler: MinMaxScaler
